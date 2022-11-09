@@ -1,16 +1,22 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include <Windows.h>
+#include <stdlib.h>
 #include "Units.h"
-
 
 class Player {
 	public:
-	Player(int wich);
+	
+	Player();
+	Player(int wichPlay);
 	virtual ~Player() = default;
-	std::vector<std::vector<char>> units;
+
+	COORD unitCoord = {-1, -1};
+	int m_playerNumber;
+	std::vector<Units*>m_unitsExist;
+
+	COORD getUnitPos();
 	private:
 
 };
-
-
