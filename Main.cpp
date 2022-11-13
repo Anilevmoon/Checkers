@@ -14,9 +14,28 @@ int main()
     Action actions(2);
     Board board(player, player2);
 
+    board.CheckRules();
+    system("pause");
+    system("cls");
+
     for(;;) {
-        board.boardDraw(player, player2, hConsole);
+        board.boardDraw(player, player2, hConsole, bool(actions.m_IsPlayerOneTurn));
         actions.ActiveTurn(board, player, player2);
+
+        if(actions.DetectEnd(player) && actions.DetectEnd(player2)) {
+            continue;
+        } else if(actions.DetectEnd(player) && !actions.DetectEnd(player2)){
+            system("cls");
+            system("color 1");
+            for(auto i = 0; i<30; i++) { std::cout<<"               PLAYER ONE WINS\n"<<std::endl; }
+            system("pause");
+            return 0;
+        } else {
+            system("cls");
+            system("color 1");
+            for(auto i = 0; i<30; i++){ std::cout<<"               PLAYER TWO WINS\n"<<std::endl;}
+            system("pause");
+            return 0;
+        }
     }
-    std::cout << "Hello World!\n";
 }

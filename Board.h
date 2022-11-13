@@ -6,7 +6,7 @@
 #include <Windows.h>
 class Board {
 	public:
-
+	bool m_possibleKill = false;
 	bool m_isChoosen = false;
 	int m_choosenXpos = -1;
 	int m_choosenYpos = -1;
@@ -17,11 +17,13 @@ class Board {
 	std::vector<std::vector<char>> m_MapVector;
 	int m_selectXposition = 0;
 	int m_selectYposition = 0;
-    HANDLE m_hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	HANDLE m_hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	Board();
 	Board(Player& a, Player& b);
-	
-	void boardDraw(Player& a, Player& b, HANDLE hCons);
+
+	void CheckRules();
+
+	void boardDraw(Player& a, Player& b, HANDLE hCons, bool isPlayerOne);
 	void ColoredCells(int x, int y, HANDLE hConsole, int colorR = 126, int colorY = 132);
 
 	void TakePositions(Player& a, Player& b);
@@ -30,8 +32,8 @@ class Board {
 
 	void colorSelectPos(int x, int y, HANDLE hCons);
 	bool MoveAbilitiCheck(int x, int y);
-	void colorAbleMoves(HANDLE hCons);
-	void CheckAbleMoves(HANDLE hCons, int xMove, int yMove);
+	void colorAbleMoves(HANDLE hCons, bool isPlayerone);
+	void CheckAbleMoves(HANDLE hCons, int xMove, int yMove, bool isPlayerone);
 
 	virtual ~Board() = default;
 
